@@ -3,7 +3,11 @@
 1. Write a function called `multiplyBy` that takes a `number` as an argument and returns a function. Returned function takes another `number` as an argument and returns the multiplication of both the numbers.
 
 ```js
-// Your code goes here
+function multiplyBy(digit1) {
+  return function double(digit2) {
+    return digit1 * digit2;
+  };
+}
 
 const double = multiplyBy(2);
 const final = double(15); // final should be 30
@@ -12,7 +16,11 @@ const final = double(15); // final should be 30
 2. Write a function called `fullName` that takes a string `firstName` as an argument and returns a function. Returned function takes another string `lastName` as an argument and returns full name.
 
 ```js
-// Your code goes here
+function fullName(firstName) {
+  return function handleFullName(lastName) {
+    return firstName + lastName;
+  };
+}
 
 const name = fullName("Will");
 const final = name("Smith"); // final should be "Will Smith"
@@ -22,7 +30,11 @@ const final = name("Smith"); // final should be "Will Smith"
 
 ```js
 function isInBetween(a, b) {
-  // your code goes here
+  return function result(c) {
+    if (a < c && c < b) {
+      return true;
+    } else return false;
+  };
 }
 
 const isChild = isInBetween(10, 100);
@@ -35,7 +47,9 @@ isChild(103); // false
 
 ```js
 function letsWishThem(greeting) {
-  // your code goes here
+  return function callWithString(str) {
+    console.log(greeting + ` ${str}`);
+  };
 }
 
 const callWithHey = letsWishThem("Hey");
@@ -48,7 +62,10 @@ callWithHello("How Are You?"); // Hello How Are You?
 
 ```js
 function addGame(gameName) {
-  // your code goes here
+  let score = 1;
+  return function game() {
+    console.log(`Your score of ${gameName} is ${score++}`);
+  };
 }
 
 // Output
@@ -64,14 +81,19 @@ cricket(); // Your score of Cricket is 2
 
 ```js
 function getCard(suit) {
-  // your code goes here
+  var card = [2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K", "A"];
+  return function cardResult() {
+    console.log(
+      `Card is: ${card[Math.floor(Math.random() * card.length)]} ${suit} `
+    );
+  };
 }
 
 // Output
-const randomClub = addGame("Club");
+const randomClub = getCard("Club");
 randomClub(); // Card is: 6 Club
 randomClub(); // Card is: A Club
-const randomSpade = addGame("Spade");
+const randomSpade = getCard("Spade");
 randomSpade(); // Card is: 6 Spade
 randomSpade(); // Card is: A Spade
 ```

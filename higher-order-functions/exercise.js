@@ -64,17 +64,49 @@ function reduce(array, callback, initialValue) {
 }
 
 //Extension 3
-function intersection(arrays) {
-  return arrays.flat();
+function intersectionOf2Array(array1, array2) {
+  return array1.reduce((acc, v) => {
+    acc = acc.concat(
+      array2.filter(v2 => {
+        if (v2 == v) {
+          return v;
+        }
+      })
+    );
+    return acc;
+  }, []);
 }
 
-// console.log(intersection([5, 10, 15, 20], [15, 88, 1, 5, 7], [1, 10, 15, 5, 20]));
+function intersection(...arrays) {
+  var result = arrays[0];
+  return arrays.reduce((acc, v) => {
+    result = intersectionOf2Array(result, v);
+    acc = result;
+    return acc;
+  }, []);
+}
+console.log(
+  intersection([
+    [5, 10, 15, 20],
+    [15, 88, 1, 5, 7],
+    [1, 10, 15, 5, 20]
+  ])
+);
 // should log: [5, 15]
 
 //Extension 4
-function union(arrays) {}
+function union(arrays) {
+  var arraysFlat = arrays.flat();
 
-// console.log(union([5, 10, 15], [15, 88, 1, 5, 7], [100, 15, 10, 1, 5]));
+  return arraysFlat.reduce((acc, v, i) => {
+    if (i == arraysFlat.lastIndexOf(v)) {
+      acc = acc.concat(v);
+    }
+    return acc;
+  }, []);
+}
+
+// console.log(union([[5, 10, 15], [15, 88, 1, 5, 7], [100, 15, 10, 1, 5]]));
 // should log: [5, 10, 15, 88, 1, 7, 100]
 
 //Extension 5
